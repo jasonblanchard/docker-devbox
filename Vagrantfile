@@ -14,12 +14,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network "forwarded_port", guest: 27017, host: 27017
   config.vm.network "forwarded_port", guest: 6379, host: 6379
+  config.vm.network "forwarded_port", guest: 5432, host: 5432
 
   config.vm.provision :shell, :path => "bootstrap.sh"
 
   config.vm.provision "docker" do |d|
     d.pull_images "ehazlett/mongodb"
     d.pull_images "jasonblanchard/redis"
+    d.pull_images "paintedfox/postgresql"
 
     d.run "mongodb", 
       image: "ehazlett/mongodb",
@@ -28,5 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     d.run "redis",
       image: "jasonblanchard/redis",
       args: "-p 6379:6379"
+
+    d.run "postgresql",
+      image: "paintedfox/postgresql",
+      args: "-p 5432:5432 -v /home/vagrant/postgresqldata:/data -e USER='super' -e DB='super' -e PASS='password'"
   end
 end
