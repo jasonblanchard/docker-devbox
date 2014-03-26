@@ -1,0 +1,24 @@
+host_name: booknodes-devbox
+memory: 4048
+cpus: 2
+services:
+  mongodb:
+      image: ehazlett/mongodb
+      args: -p 27017:27017 -v /home/vagrant/mongodata:/tmp/mongo -e DATA_DIR=/tmp/mongo
+      forwarded_ports:
+        guest: 27017
+        host: 27017
+  redis:
+      image: jasonblanchard/redis
+      arg: -p 6379:6379
+      forwarded_ports:
+        guest: 6379
+        host: 6379
+  postgresql:
+      image: paintedfox/postgresql
+      args: -p 5432:5432 -v /home/vagrant/postgresqldata:/data -e USER='docker' -e DB='docker' -e PASS='docker'
+      forwarded_ports:
+        guest: 5432
+        host: 5432
+provision_scripts:
+  - bootstrap.sh

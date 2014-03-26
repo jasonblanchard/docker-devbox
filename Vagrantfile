@@ -1,9 +1,11 @@
+require 'yaml'
+
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  ddb_config_path = File.expand_path(File.dirname(__FILE__)) + "/config.json"
-  ddb_config = JSON.parse(File.read(ddb_config_path))
+  ddb_config_path = File.expand_path(File.dirname(__FILE__)) + "/config.yml"
+  ddb_config = YAML.load_file(ddb_config_path)
 
   config.vm.box       = 'precise64'
   config.vm.box_url   = 'http://files.vagrantup.com/precise42.box'
