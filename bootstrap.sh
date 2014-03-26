@@ -1,4 +1,9 @@
 #! /usr/bin/env bash
 
-mkdir /home/vagrant/mongodata
-mkdir /home/vagrant/postgresqldata
+if [ ! -d "/home/vagrant/mongodata" ]; then
+  mkdir /home/vagrant/mongodata
+fi
+
+if [ ! -d "/home/vagrant/postgresqldata" ]; then
+  mkdir /home/vagrant/postgresqldata
+fi
