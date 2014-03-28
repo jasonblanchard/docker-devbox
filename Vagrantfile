@@ -18,6 +18,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, :path => "bootstrap.sh"
 
+  config.vm.synced_folder "src/", "/home/vagrant/src"
+
   ddb_config["provision_scripts"].each do |path|
     config.vm.provision :shell, :path => path
   end
