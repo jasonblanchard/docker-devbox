@@ -15,7 +15,7 @@ services:
         guest: 6379
         host: 6379
   postgresql:
-      image: paintedfox/postgresql
+      image: jasonblanchard/postgresql2
       args: -p 5432:5432 -v /home/vagrant/postgresqldata:/data -e USER='docker' -e DB='docker' -e PASS='docker'
       forwarded_ports:
         guest: 5432
