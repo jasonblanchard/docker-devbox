@@ -9,7 +9,7 @@ services:
         guest: 27017
         host: 27017
   redis:
-      image: jasonblanchard/redis
+      image: dockerfile/redis
       arg: -p 6379:6379
       forwarded_ports:
         guest: 6379
